@@ -41,6 +41,10 @@
     font-size: 58px;
     text-align: center;
     justify-content: center;
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    padding: 5px; /* Поля вокруг текста */
+    text-overflow: ellipsis; /* Добавляем многоточие */
 }
 
 .text-content {
@@ -64,8 +68,55 @@
 }
 
 .note-text {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 420px 80px;
     grid-column: 1;
     grid-row: 2;
     background: #D9D9D9;
     border-radius: 25px;
 }
+
+
+.bottom-menu {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    width: 760px;
+    height: 60px;
+    margin: auto auto 20px auto;
+}
+
+.input-note {
+    border: 4px solid #587B74;
+    border-radius: 15px;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    font-size: 30px;
+}
+
+.checklist-section {
+    overflow: hidden;
+    overflow: scroll;
+    grid-column: 1;
+    grid-row: 1;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+li {
+    padding: 10px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    list-style-type: none;
+}
+
+#template-text {
+    display: inline;
+}
+
+span {
+    margin-left: 10px;
+}
+
