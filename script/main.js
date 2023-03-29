@@ -29,3 +29,24 @@ inputText.addEventListener("keypress", (e) => {
         changeValue()
     }
 });
+
+
+//add note with template
+const checklist = document.querySelector('.checklist');
+const templateText = document.querySelector('#template-text');
+const inputNote = document.querySelector('.input-note')
+
+function addNoteText() {
+    const item = templateText.content.cloneNode(true);
+    item.querySelector('span').textContent = `${inputNote.value}`
+    checklist.append(item);
+    inputNote.value = '';
+};
+
+inputNote.addEventListener("keypress", (e) => {
+    if (e.keyCode == 13) {
+        addNoteText();
+        console.log('sndvjn');
+    }
+});
+
