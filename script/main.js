@@ -16,11 +16,17 @@ newDivContent = document.querySelector(".text-content")
 
 // inputText.addEventListener("keydown", changeValueInputToDiv)
 
-function changeValue () {
+function changeValue() {
     value = inputText.value
     newTextInDiv.innerHTML = `${inputText.value}`
     inputText.style.display = "none";
     newDivContent.style.display = "block"
+}
+
+function changeDivOnInput() {
+    newDivContent.style.display = "none";
+    inputText.style.display = "block";
+    inputText = newDivContent.value;
 }
 
 
@@ -29,3 +35,5 @@ inputText.addEventListener("keypress", (e) => {
         changeValue()
     }
 });
+
+newDivContent.addEventListener("click", changeDivOnInput);

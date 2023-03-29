@@ -37,7 +37,10 @@
 }
 
 .text-title {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 57px;
+    text-align: center;
+    justify-content: center;
 }
 
 .text-content {
