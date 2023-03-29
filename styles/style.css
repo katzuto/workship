@@ -36,6 +36,16 @@
     font-size: 57px;
 }
 
+.text-title {
+    font-size: 57px;
+}
+
+.text-content {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
 .button-add {
     grid-column: 2;
     grid-row: 1;
