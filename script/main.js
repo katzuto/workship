@@ -1,26 +1,8 @@
-inputText = document.querySelector(".input-title")
-newTextInDiv = document.querySelector(".text-title")
-newDivContent = document.querySelector(".text-content")
+import { inputText, newTextInDiv, newDivContent, changeValue, changeDivOnInput } from "./firstInput.js";
+import { listOfToDos, inputNote, toDoList, addNewToDoToArray, displayMessages } from "./addTask.js";
 
 
-
-// change upper input into div
-function changeValue() {
-    value = inputText.value
-    console.log(value);
-    newTextInDiv.innerHTML = value
-    inputText.style.display = "none";
-    newDivContent.style.display = "block"
-}
-
-function changeDivOnInput() {
-    value = inputText.value;
-    console.log(value)
-    newDivContent.style.display = "none";
-    inputText.style.display = "block";
-}
-
-
+// меняет инпут на див 
 inputText.addEventListener("keypress", (e) => {
     if (e.keyCode == 13) {
         changeValue()
@@ -28,26 +10,22 @@ inputText.addEventListener("keypress", (e) => {
 
 });
 
+// меняет див на инпут обратно
 newDivContent.addEventListener("click", () => {
         changeDivOnInput()
 });
 
 
-//add note with template
-const checklist = document.querySelector('.checklist');
-const templateText = document.querySelector('#template-text');
-const inputNote = document.querySelector('.input-note')
-
-function addNoteText() {
-    const item = templateText.content.cloneNode(true);
-    item.querySelector('span').textContent = `${inputNote.value}`
-    checklist.append(item);
-    inputNote.value = '';
-};
-
+// добавляется таска вытаскивая ее из массива под индивидуальным индексом
 inputNote.addEventListener("keypress", (e) => {
     if (e.keyCode == 13) {
-        addNoteText();
-        console.log('sndvjn');
+        addNewToDoToArray()
     }
 });
+
+
+
+
+
+// добавление localstorage
+
