@@ -1,35 +1,55 @@
-export const listOfToDos = document.querySelector(".list-of-todos")
-export const inputNote = document.querySelector('.input-note')
-export let toDoList = [];
+export const addMessage = document.querySelector(".input-note")
+export const todo = document.querySelector(".ul-list")
+// export const button = document.querySelector(".btn")
 
-// создаем новый объект который включает в себя написанное значение инпута
-export function addNewToDoToArray() {
-    const newToDo = {
-        name: inputNote.value,
-        checked: false,
-    }
-    toDoList.push(newToDo); // после ввода инпута объект со значением инпута добавляется в массив методом push()
-    displayMessages()
+export let todoList = []
+
+if (localStorage.getItem("todo")) {
+    todoList = JSON.parse(localStorage.getItem("todo"));
+    displayMessages();
 }
 
-// функция вывода сообщения из инпута в браузер
 export function displayMessages() {
-    let displayMessage = ""; // создали пустую строку которая у нас будет отвечать за вывод сообщения в браузер
-    toDoList.forEach(function(item, index) {
-        displayMessage += `
-            <li>
-                <input type="checkbox" id="item_${index}" ${item.checked? "checked" : ""}>
-                <label for="item_${index}">${item.name}</label>
-                <button class="btn_${index}">delete</button>
-            </li>
-        ` // сочетаем строки стоит обратить на это внимание
-        listOfToDos.innerHTML = displayMessage;
-    })// метод forEach перебирает каждое значение массива и берет в себя коллбек функцию и применяет эту функцию к каждому элементу массива
+    let displayMessage = "";
+    if (todoList.length === 0) {
+        todo.innerHTML = "";
+    }
+    todoList.forEach(function(item, i) {
+    displayMessage += `
+    <li>
+    <input type="checkbox" id="item_${i}" ${item.checked ? "checked" : ""}>
+    <label for="item_${i}" class="${item.important ? "important" : ""}">${item.todo}</label>
+    </li>
+    `
+    todo.innerHTML = displayMessage;
+    })
 }
 
-// удаление таски не работавет
-// export function deleteTask() {
-//     toDoList.forEach(function(item, index) {
-//         toDoList.splice(index, 1)
-//     })
-// }
+todo.addEventListener("change", function(event) {
+    let idInput = (event.target.getAttribute("id"));
+    let forLabel = todo.querySelector("[for =" + idInput + "]");
+    let valueLabel = forLabel.innerHTML;
+
+    todoList.forEach(function(item) {
+        if (item.todo === valueLabel) {
+            item.checked = !item.checked
+            localStorage.setItem("todo", JSON.stringify(todoList));
+        }
+    })
+    
+})
+
+todo.addEventListener("contextmenu", function(event) {
+    event.preventDefault()
+    todoList.forEach(function(item, i) {
+        if (item.todo === event.target.innerHTML) {
+            if (event.ctrlKey || event.metaKey) {
+                todoList.splice(i, 1)
+            } else {
+                item.important = !item.important;
+            }
+            displayMessages()
+            localStorage.setItem("todo", JSON.stringify(todoList));
+        }
+    });
+})
